@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.amazonaws.com.google.gson.Gson;
@@ -17,8 +19,12 @@ import com.amazonaws.mobileconnectors.dynamodbv2.document.Search;
 public class SearchActivity extends AppCompatActivity {
     private TextView refid;
     private  DocumentDO doc;
+    private TextView name;
+    private TextView mail;
+    private TextView tel;
+    private TextView info;
     private String ref;
-
+    private Button returntohome;
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
@@ -37,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_main2);
 
         String docJson=getIntent().getStringExtra("documents");
         doc = new Gson().fromJson(docJson,DocumentDO.class);
@@ -61,7 +67,29 @@ public class SearchActivity extends AppCompatActivity {
 
         Intent i =getIntent();
         refid = (TextView)findViewById(R.id.reference);
-        refid.setText(doc.getUserId());
+        refid.setText("Numéro de dossier:  "+doc.getUserId());
+
+        name = (TextView)findViewById(R.id.username);
+        name.setText(doc.getUsername());
+
+        mail = (TextView)findViewById(R.id.email);
+        mail.setText(doc.getEmail());
+
+        tel = (TextView)findViewById(R.id.tel);
+        tel.setText(doc.getPhone());
+
+        info = (TextView)findViewById(R.id.infosupp);
+        info.setText(doc.getNote());
+
+        returntohome =(Button)findViewById(R.id.returntohome);
+        returntohome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(SearchActivity.this, SCANActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
