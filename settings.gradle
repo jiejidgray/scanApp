@@ -1,0 +1,1 @@
+include ':app', ':aws-android-sdk-mobile-client-2.6.26', ':aws-android-sdk-auth-core-2.6.26', ':aws-android-sdk-auth-ui-2.6.26', ':aws-android-sdk-auth-userpools-2.6.26', ':zxing-android-embedded-3.6.0', ':materialtextfield-1.0.7'
